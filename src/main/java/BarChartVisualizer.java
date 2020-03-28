@@ -4,7 +4,6 @@ import de.erichseifert.gral.graphics.Insets2D;
 import de.erichseifert.gral.plots.PiePlot;
 import de.erichseifert.gral.plots.legends.ValueLegend;
 import de.erichseifert.gral.ui.InteractivePanel;
-import sun.print.IPPPrintService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +25,7 @@ public class BarChartVisualizer extends JFrame {
         setTitle(title);
         PiePlot piePlot = new PiePlot(dataTable);
         piePlot.setLegendVisible(true);
-        piePlot.setInsets(new Insets2D.Double(20.0,40.0,40.0,40.0));
+        piePlot.setInsets(new Insets2D.Double(20.0, 40.0, 40.0, 40.0));
         PiePlot.PieSliceRenderer pointRenderer = (PiePlot.PieSliceRenderer) piePlot.getPointRenderer(dataTable);
         pointRenderer.setInnerRadius(1.5);
         pointRenderer.setGap(0.2);
@@ -34,7 +33,7 @@ public class BarChartVisualizer extends JFrame {
 
         ValueLegend legend = (ValueLegend) piePlot.getLegend();
         legend.setLabelColumn(1);
-        setSize(1000,1000);
+        setSize(1000, 1000);
         add(new InteractivePanel(piePlot));
     }
 }
