@@ -5,7 +5,7 @@ The data.csv file contains data on corona virus downloaded from the european uni
 
 
 # Build
-run: "mvn clean package" in the root folder of the project. 
+run: `mvn clean package` in the root folder of the project. 
 
 The resulting dsExperiment.jar file will be in the /target directory. 
 When run, the data.csv file needs to be in the same directory as the jar file.
@@ -13,4 +13,4 @@ When run, the data.csv file needs to be in the same directory as the jar file.
 
 # Running the application
 Make sure the data.csv file is in the same directory as the .jar file. 
-Then run the application with: java -jar dsExperiment.jar
+Then run the application with: `java -jar dsExperiment.jar`
