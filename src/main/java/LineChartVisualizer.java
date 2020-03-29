@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 public class LineChartVisualizer extends JFrame {
     public LineChartVisualizer(int col, int row, String title, DataSource dataSource) throws ParseException {
         DataTable top10DeathsPerCountryTable = new LineChartProcessor(dataSource).aggregateColumnOverColumnTopK(col, row, 0);
+        DataTableLogger.logDataTable(top10DeathsPerCountryTable, title);
         this.drawLinePlot(top10DeathsPerCountryTable, title);
     }
 

@@ -12,6 +12,7 @@ import java.awt.*;
 public class PieChartVisualizer extends JFrame {
     public PieChartVisualizer(int col, int row, String title, DataSource dataSource) {
         DataTable top10DeathsPerCountryTable = new PieChartProcessor(dataSource).aggregateColumnOverColumnTopK(col, row, 10);
+        DataTableLogger.logDataTable(top10DeathsPerCountryTable, title);
         this.drawPiePlot(top10DeathsPerCountryTable, title);
     }
 

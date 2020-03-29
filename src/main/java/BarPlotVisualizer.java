@@ -14,8 +14,10 @@ import java.awt.*;
 import static de.erichseifert.gral.plots.XYPlot.AXIS_X;
 
 public class BarPlotVisualizer extends JFrame {
+
     public BarPlotVisualizer(int col, int row, String title, DataSource dataSource) {
         DataTable top10DeathsPerCountryTable = new BarChartDataProcessor(dataSource).aggregateColumnOverColumnTopK(col, row, 10);
+        DataTableLogger.logDataTable(top10DeathsPerCountryTable, title);
         this.drawBarPlot(top10DeathsPerCountryTable, title);
     }
 
