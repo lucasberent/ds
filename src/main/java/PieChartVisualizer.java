@@ -1,27 +1,24 @@
 import de.erichseifert.gral.data.DataSource;
 import de.erichseifert.gral.data.DataTable;
 import de.erichseifert.gral.graphics.Insets2D;
+import de.erichseifert.gral.graphics.Location;
 import de.erichseifert.gral.plots.PiePlot;
 import de.erichseifert.gral.plots.legends.ValueLegend;
 import de.erichseifert.gral.ui.InteractivePanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
-public class BarChartVisualizer extends JFrame {
-    public BarChartVisualizer(int col, int row, String title) throws IOException {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setMinimumSize(getContentPane().getMinimumSize());
-        setSize(800, 400);
-        DataSource dataSource = new InputDataReader().readFile("data.csv");
-        Processor processor = new Processor(dataSource);
-
-        DataTable top10DeathsPerCountryTable = processor.aggregateColumnValuesOverColumnTop10BarChartData(col, row);
+public class PieChartVisualizer extends JFrame {
+    public PieChartVisualizer(int col, int row, String title, DataSource dataSource) {
+        DataTable top10DeathsPerCountryTable = new PieChartProcessor(dataSource).aggregateColumnOverColumnTopK(col, row, 10);
         this.drawPiePlot(top10DeathsPerCountryTable, title);
     }
 
     private void drawPiePlot(final DataTable dataTable, String title) {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setMinimumSize(getContentPane().getMinimumSize());
+        setSize(800, 400);
         setTitle(title);
         PiePlot piePlot = new PiePlot(dataTable);
         piePlot.setLegendVisible(true);
@@ -30,6 +27,8 @@ public class BarChartVisualizer extends JFrame {
         pointRenderer.setInnerRadius(1.5);
         pointRenderer.setGap(0.2);
         pointRenderer.setValueColor(Color.BLACK);
+        pointRenderer.setValueVisible(true);
+        pointRenderer.setValueLocation(Location.NORTH);
 
         ValueLegend legend = (ValueLegend) piePlot.getLegend();
         legend.setLabelColumn(1);

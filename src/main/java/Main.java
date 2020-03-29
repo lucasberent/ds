@@ -1,18 +1,22 @@
+import de.erichseifert.gral.data.DataSource;
+
 import java.io.IOException;
 import java.text.ParseException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
-        Visualizer visualizer = new Visualizer(4, 6, "Corona cases per counrty (top 10 worldwide)");
+        DataSource dataSource = new InputDataReader().readFile("data.csv");
+
+        BarPlotVisualizer visualizer = new BarPlotVisualizer(4, 6, "Corona cases per counrty (top 10 worldwide)", dataSource);
         visualizer.setVisible(true);
 
-        Visualizer visualizer2 = new Visualizer(5, 6, "Corona deaths per counrty (top 10 worldwide)");
+        BarPlotVisualizer visualizer2 = new BarPlotVisualizer(5, 6, "Corona deaths per counrty (top 10 worldwide)", dataSource);
         visualizer2.setVisible(true);
 
-        BarChartVisualizer visualizer3 = new BarChartVisualizer(4, 6, "Corona cases per counrty (top 10 worldwide)");
+        PieChartVisualizer visualizer3 = new PieChartVisualizer(4, 6, "Corona cases per counrty (top 10 worldwide)", dataSource);
         visualizer3.setVisible(true);
 
-        LineChartVisualizer lineChartVisualizer = new LineChartVisualizer(4, 0, "Corona cases with dates");
+        LineChartVisualizer lineChartVisualizer = new LineChartVisualizer(4, 0, "New Corona cases worldwide per dates", dataSource);
         lineChartVisualizer.setVisible(true);
     }
 }

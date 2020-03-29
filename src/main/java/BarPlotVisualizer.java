@@ -10,23 +10,19 @@ import de.erichseifert.gral.util.MathUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 import static de.erichseifert.gral.plots.XYPlot.AXIS_X;
 
-public class Visualizer extends JFrame {
-    public Visualizer(int col, int row, String title) throws IOException {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setMinimumSize(getContentPane().getMinimumSize());
-        setSize(800, 400);
-        DataSource dataSource = new InputDataReader().readFile("data.csv");
-        Processor processor = new Processor(dataSource);
-
-        DataTable top10DeathsPerCountryTable = processor.aggregateColumnValuesOverColumnTop10(col, row);
+public class BarPlotVisualizer extends JFrame {
+    public BarPlotVisualizer(int col, int row, String title, DataSource dataSource) {
+        DataTable top10DeathsPerCountryTable = new BarChartDataProcessor(dataSource).aggregateColumnOverColumnTopK(col, row, 10);
         this.drawBarPlot(top10DeathsPerCountryTable, title);
     }
 
     private void drawBarPlot(final DataTable dataTable, String title) {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setMinimumSize(getContentPane().getMinimumSize());
+        setSize(800, 400);
         BarPlot barPlot = new BarPlot(dataTable);
         barPlot.setInsets(new Insets2D.Double(40.0, 40.0, 40.0, 40.0));
         barPlot.setBarWidth(5.0);

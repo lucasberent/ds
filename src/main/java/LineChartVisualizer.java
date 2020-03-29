@@ -7,23 +7,19 @@ import de.erichseifert.gral.plots.axes.LogarithmicRenderer2D;
 import de.erichseifert.gral.ui.InteractivePanel;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class LineChartVisualizer extends JFrame {
-    public LineChartVisualizer(int col, int row, String title) throws IOException, ParseException {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setMinimumSize(getContentPane().getMinimumSize());
-        setSize(800, 400);
-        DataSource dataSource = new InputDataReader().readFile("data.csv");
-        Processor processor = new Processor(dataSource);
-
-        DataTable top10DeathsPerCountryTable = processor.calculateXYplotStats(col, row);
+    public LineChartVisualizer(int col, int row, String title, DataSource dataSource) throws ParseException {
+        DataTable top10DeathsPerCountryTable = new LineChartProcessor(dataSource).aggregateColumnOverColumnTopK(col, row, 0);
         this.drawLinePlot(top10DeathsPerCountryTable, title);
     }
 
     private void drawLinePlot(final DataTable dataTable, String title) {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setMinimumSize(getContentPane().getMinimumSize());
+        setSize(800, 400);
         setTitle(title);
         XYPlot xyPlot = new XYPlot(dataTable);
         setSize(1000, 1000);

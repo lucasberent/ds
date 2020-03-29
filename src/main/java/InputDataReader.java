@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class InputDataReader {
-    private String fileName;
     private DataSource dataSource;
 
     public DataSource readFile(String fileName) throws IOException {
